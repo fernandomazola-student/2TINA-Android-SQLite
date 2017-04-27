@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">2TINA-Android-SQLite</string>
+    <string name="cadastrarnovo">Cadastrar Novo</string>
 </resources>
