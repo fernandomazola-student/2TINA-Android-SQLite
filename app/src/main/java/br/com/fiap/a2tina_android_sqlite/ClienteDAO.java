@@ -2,9 +2,11 @@ package br.com.fiap.a2tina_android_sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +47,16 @@ public class ClienteDAO extends SQLiteOpenHelper {
         db.insert(TBCLIENTE, null, values);
     }
 
+    //Logica consulta
     public List<Cliente> all(){
-
+        List<Cliente> clientes = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TBCLIENTE, new String[]{"nome", "email"}, null, null,null, null, "nome ASC");
+        while(cursor.moveToNext()){
+            String nome = cursor.getString(0);
+            String email = cursor.getString(1);
+            clientes.add(new Cliente(nome, email));
+        }
+        return clientes;
     }
 }
