@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.List;
+
 /**
  * Created by logonrm on 27/04/2017.
  */
@@ -20,11 +22,23 @@ public class ClienteDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        String sql = "CREATE TABLE `cliente` (\n" +
+                "\t`id`\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\t`nome`\tTEXT,\n" +
+                "\t`email`\tTEXT\n" +
+                ")"
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public void insert(Cliente cliente){
+
+    }
+
+    public List<Cliente> all(){
 
     }
 }
