@@ -22,11 +22,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         clienteDAO = new ClienteDAO(this);
-        List<Cliente> clientes = clienteDAO.all();
-        ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientes);
-
         lstClientes = (ListView) findViewById(R.id.lstClientes);
-        lstClientes.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        atualizarLista();
     }
 
     @Override
@@ -43,5 +46,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(it);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void atualizarLista(){
+        List<Cliente> clientes = clienteDAO.all();
+        ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientes);
+        lstClientes.setAdapter(adapter);
     }
 }
