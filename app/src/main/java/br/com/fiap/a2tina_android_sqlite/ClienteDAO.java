@@ -1,5 +1,6 @@
 package br.com.fiap.a2tina_android_sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,7 +28,7 @@ public class ClienteDAO extends SQLiteOpenHelper {
                 "\t`nome`\tTEXT,\n" +
                 "\t`email`\tTEXT\n" +
                 ")";
-        
+
         db.execSQL(sql);
     }
 
@@ -37,7 +38,11 @@ public class ClienteDAO extends SQLiteOpenHelper {
     }
 
     public void insert(Cliente cliente){
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nome", cliente.getNome());
+        values.put("email", cliente.getEmail());
+        db.insert(TBCLIENTE, null, values);
     }
 
     public List<Cliente> all(){
