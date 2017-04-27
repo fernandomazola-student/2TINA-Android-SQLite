@@ -20,5 +20,11 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void Salvar(View view) {
+        String nome = edtNome.getText().toString();
+        String email = edtEmail.getText().toString();
+
+        Cliente cliente = new Cliente(nome, email);
+
+        //Chamar método para salvar no banco de dados
     }
 }
