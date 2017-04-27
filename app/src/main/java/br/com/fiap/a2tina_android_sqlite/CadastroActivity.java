@@ -9,6 +9,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     EditText edtNome;
     EditText edtEmail;
+    ClienteDAO clienteDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,8 @@ public class CadastroActivity extends AppCompatActivity {
 
         edtNome = (EditText) findViewById(R.id.edtNome);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
+
+        clienteDAO = new ClienteDAO(this);
     }
 
     public void Salvar(View view) {
@@ -26,5 +29,7 @@ public class CadastroActivity extends AppCompatActivity {
         Cliente cliente = new Cliente(nome, email);
 
         //Chamar método para salvar no banco de dados
+        clienteDAO.insert(cliente);
+        finish();
     }
 }
