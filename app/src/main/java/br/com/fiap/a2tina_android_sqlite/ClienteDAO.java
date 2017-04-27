@@ -22,11 +22,13 @@ public class ClienteDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE `cliente` (\n" +
+        String sql = "CREATE TABLE" + TBCLIENTE + "(\n" +
                 "\t`id`\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "\t`nome`\tTEXT,\n" +
                 "\t`email`\tTEXT\n" +
-                ")"
+                ")";
+        
+        db.execSQL(sql);
     }
 
     @Override
