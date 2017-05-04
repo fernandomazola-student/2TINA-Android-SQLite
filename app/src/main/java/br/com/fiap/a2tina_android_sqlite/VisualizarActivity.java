@@ -14,4 +14,7 @@ public class VisualizarActivity extends AppCompatActivity {
 
     public void editar(View view) {
     }
+
+    public void excluir(View view) {
+    }
 }
