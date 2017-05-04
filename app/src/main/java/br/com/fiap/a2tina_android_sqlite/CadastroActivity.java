@@ -10,6 +10,7 @@ public class CadastroActivity extends AppCompatActivity {
     EditText edtNome;
     EditText edtEmail;
     ClienteDAO clienteDAO;
+    Cliente cliente;
     boolean estaEditando = false;
 
     @Override
@@ -26,7 +27,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         if(bundle != null){
             estaEditando = true;
-            Cliente cliente = (Cliente) bundle.get("cliente");
+            cliente = (Cliente) bundle.get("cliente");
             if(cliente != null){
                 getSupportActionBar().setTitle(R.string.editar_cliente);
                 edtNome.setText(cliente.getNome());
@@ -39,10 +40,13 @@ public class CadastroActivity extends AppCompatActivity {
         String nome = edtNome.getText().toString();
         String email = edtEmail.getText().toString();
 
-        Cliente cliente = new Cliente(nome, email);
+
         if(estaEditando){
+            cliente.setNome(nome);
+            cliente.setEmail(email);
             clienteDAO.update(cliente);
         }else{
+            cliente = new Cliente(nome, email);
             //Chamar método para salvar no banco de dados
             clienteDAO.insert(cliente);
         }
