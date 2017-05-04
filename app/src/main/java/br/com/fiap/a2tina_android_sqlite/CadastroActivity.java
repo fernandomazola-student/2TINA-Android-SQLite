@@ -10,6 +10,7 @@ public class CadastroActivity extends AppCompatActivity {
     EditText edtNome;
     EditText edtEmail;
     ClienteDAO clienteDAO;
+    boolean estaEditando = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,18 @@ public class CadastroActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
 
         clienteDAO = new ClienteDAO(this);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null){
+            estaEditando = true;
+            Cliente cliente = (Cliente) bundle.get("cliente");
+            if(cliente != null){
+                getSupportActionBar().setTitle(R.string.editar_cliente);
+                edtNome.setText(cliente.getNome());
+                edtEmail.setText(cliente.getEmail());
+            }
+        }
     }
 
     public void Salvar(View view) {
@@ -27,9 +40,12 @@ public class CadastroActivity extends AppCompatActivity {
         String email = edtEmail.getText().toString();
 
         Cliente cliente = new Cliente(nome, email);
-
-        //Chamar método para salvar no banco de dados
-        clienteDAO.insert(cliente);
+        if(estaEditando){
+            clienteDAO.update(cliente);
+        }else{
+            //Chamar método para salvar no banco de dados
+            clienteDAO.insert(cliente);
+        }
         finish();
     }
 }

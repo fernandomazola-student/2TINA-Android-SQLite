@@ -45,6 +45,7 @@ public class ClienteDAO extends SQLiteOpenHelper {
         values.put("nome", cliente.getNome());
         values.put("email", cliente.getEmail());
         db.insert(TBCLIENTE, null, values);
+        db.close();
     }
 
     //Logica consulta
@@ -56,13 +57,24 @@ public class ClienteDAO extends SQLiteOpenHelper {
             int id = cursor.getInt(0);
             String nome = cursor.getString(1);
             String email = cursor.getString(2);
-            clientes.add(new Cliente(nome, email));
+            clientes.add(new Cliente(id, nome, email));
         }
+        db.close();
         return clientes;
     }
 
     public void delete(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TBCLIENTE, "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public void update(Cliente cliente){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("nome", cliente.getNome());
+        cv.put("email", cliente.getEmail());
+        db.update(TBCLIENTE,cv, "id = ?", new String[]{String.valueOf(cliente.getId())});
+        db.close();
     }
 }

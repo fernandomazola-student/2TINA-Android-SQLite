@@ -1,5 +1,6 @@
 package br.com.fiap.a2tina_android_sqlite;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,12 @@ public class VisualizarActivity extends AppCompatActivity {
     }
 
     public void editar(View view) {
+        //Reaproveitando a tela de cadastro
+        Intent it = new Intent(VisualizarActivity.this, CadastroActivity.class);
+        it.putExtra("cliente", cliente);
+        startActivity(it);
+        finish();
+
 
     }
 

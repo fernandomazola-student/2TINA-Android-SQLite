@@ -6,4 +6,5 @@
     <string name="email">E-mail:</string>
     <string name="txtEditar">Editar</string>
     <string name="txtExcluir">Excluir</string>
+    <string name="editar_cliente">Editar Cliente</string>
 </resources>
