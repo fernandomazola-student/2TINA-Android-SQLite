@@ -51,12 +51,18 @@ public class ClienteDAO extends SQLiteOpenHelper {
     public List<Cliente> all(){
         List<Cliente> clientes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TBCLIENTE, new String[]{"nome", "email"}, null, null,null, null, "nome ASC");
+        Cursor cursor = db.query(TBCLIENTE, new String[]{"id", "nome", "email"}, null, null,null, null, "nome ASC");
         while(cursor.moveToNext()){
-            String nome = cursor.getString(0);
-            String email = cursor.getString(1);
+            int id = cursor.getInt(0);
+            String nome = cursor.getString(1);
+            String email = cursor.getString(2);
             clientes.add(new Cliente(nome, email));
         }
         return clientes;
+    }
+
+    public void delete(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TBCLIENTE, "id = ?", new String[]{String.valueOf(id)});
     }
 }
