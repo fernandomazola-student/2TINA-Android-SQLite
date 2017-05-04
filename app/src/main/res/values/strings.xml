@@ -4,4 +4,6 @@
     <string name="salvar">Salvar</string>
     <string name="nome">Nome:</string>
     <string name="email">E-mail:</string>
+    <string name="txtEditar">Editar</string>
+    <string name="txtExcluir">Excluir</string>
 </resources>
